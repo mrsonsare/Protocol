@@ -1,3 +1,7 @@
+void setup() {
+  // put your setup code here, to run once:
+
+}
 #include<ESP8266WiFi.h>
 #include<WiFiClient.h>
 #include<ESP8266HTTPClient.h>
@@ -5,9 +9,9 @@
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-String URL="http://api.thingspeak.com/update?api_key=PWDVVUVCNVNV1KFN&field1=";   //DON'T USE "https:" use only "http"
+String URL="http://api.thingspeak.com/update?api_key=PWDVVUVCNVNV1KFN&field1=200";   //DON'T USE "https:" use only "http"
 
-//              here on above we are sending random  data in constant way
+//              here on above we are sending 200 as data in constant way
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,16 +33,18 @@ void setup(){
 void loop(){
   WiFiClient client;
   HTTPClient http;
-  int randomdata = random(0,200);
-  String newUrl = URL + String(randomdata);
-  http.begin(client,newUrl);
+  http.begin(client,URL);
  
 int responsecode = http.GET();
 Serial.println(responsecode);
+String data = http.getString();
 
-
-Serial.println(randomdata);
+Serial.println(data);
 
   http.end();
   delay(5000);
+}
+void loop() {
+  // put your main code here, to run repeatedly:
+
 }
